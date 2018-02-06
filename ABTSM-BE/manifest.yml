@@ -1,0 +1,11 @@
+applications:
+- name: abtsm-be
+  memory: 1G            # 할당할 힙 메모리
+  instances: 1          # 인스턴스 수 
+  random-route: true    # 라우팅 정보를 랜덤하게 한다. 라우팅에 대한 고민 없으려면 true
+  buildpack: java_buildpack   # 선택..detecting과정 거치므로 ok
+  path: ./target/abtsm-be-0.0.1-SNAPSHOT.jar
+  env:
+    SPRING_PROFILES_ACTIVE: dev
+  services:
+    - abtsm-be-db

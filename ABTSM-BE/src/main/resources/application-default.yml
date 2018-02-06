@@ -1,0 +1,19 @@
+
+server:
+  port: ${PORT:8090}
+
+# 로컬에는 H2  
+spring:  
+  application:
+    name: ABTSM-BE
+  h2:
+    console:
+      enabled : true
+  datasource:
+    initialize: true    # resource내의 sql구문이 서버구동시에 작동x. 개발단계에서는 true
+    platform: h2        # schema-h2.sql, data-h2.sql 적용
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:abstmdb;
+    username: sa
+    password: null
+      

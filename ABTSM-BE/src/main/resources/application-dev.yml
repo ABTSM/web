@@ -1,0 +1,9 @@
+# server의 port는 Pass에서 제공할 포트로 제공되기때문에 지워도 알아서 된다. 
+server:
+  port: ${PORT:8090} 
+
+# dev 환경에서는 mysql을 붙인다
+spring:
+  datasource:
+    initialize: true
+    platform: mysql

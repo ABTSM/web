@@ -1,0 +1,13 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: ABTSM-FE
+    
+management:
+  security:
+    enabled: false
+    
+rest:
+  address:  http://cloud-movie-05-friendly-fossa.paas.skcc.com
