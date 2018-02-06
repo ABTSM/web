@@ -1,4 +1,4 @@
-package com.skcc.restController;
+package com.skcc.bts.RestController;
 
 import java.util.List;
 
@@ -31,8 +31,6 @@ public class BtsRestController {
 	
 	@RequestMapping(path = "/bts", method=RequestMethod.GET)
 	public List<Bts> getAllBts(){
-//		List<Bts> list = btsService.getAllBts();
-//		System.out.println("====="+list.get(0).getSsid()+"=====");
 		return btsService.getAllBts();
 	}
 	

@@ -1,0 +1,9 @@
+applications:
+- name: abtsm-fe
+  memory: 1G
+  instances: 1
+  host: abtsm-fe
+  path: ./target/abtsm-fe-0.0.1-SNAPSHOT.jar
+  buildpack: java_buildpack
+  env:
+    SPRING_PROFILES_ACTIVE: dev
