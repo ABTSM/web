@@ -67,4 +67,12 @@ public class HomeController {
 	public String registration(HttpServletRequest request, Model model) {
 		return "registration";	
 	}
+	@RequestMapping(value= "/chatbot", method=RequestMethod.GET)
+	public String chatbot(HttpServletRequest request, Model model) {
+		return "chatbot";	
+	}
+	@RequestMapping(value= "/about", method=RequestMethod.GET)
+	public String about(HttpServletRequest request, Model model) {
+		return "about";	
+	}
 }
