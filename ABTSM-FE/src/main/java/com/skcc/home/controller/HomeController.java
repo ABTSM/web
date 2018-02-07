@@ -1,6 +1,7 @@
 package com.skcc.home.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,21 +30,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value="/index", method=RequestMethod.GET)
-	public String index(HttpServletRequest request, Model model) {
-		if(request.getAttribute("userId")==null) {
+	public String index(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model) {
+		if(session.getAttribute("userId")==null) {
 			return "login";
 		}else {
 			return "home";	
 		}
 	}
-//	@RequestMapping(value="/login", method=RequestMethod.GET)
-//	public String index(HttpServletRequest request, Model model) {
-//		if(request.getAttribute("userId")==null) {
-//			return "login";
-//		}else {
-//			return "home";	
-//		}
-//	}
+
+
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@RequestParam("userId") String userId,@RequestParam("pwd") String pwd, HttpServletRequest request ) {
 		HttpSession session = request.getSession();
@@ -57,21 +52,16 @@ public class HomeController {
 			return "redirect:/home";
 		}else {
 			System.out.println("confirmUser :"+confirmUser.getUserId());
-			request.setAttribute("userId", confirmUser.getUserId());
+//			request.setAttribute("userId", confirmUser.getUserId());
+			session.setAttribute("userId", confirmUser.getUserId());
 		}
 		return "redirect:/home";
 	}
-//	
 	
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
 		return "home";	
 	}
-	
-//	@RequestMapping(value= "/home", method=RequestMethod.GET)
-//	public String home(HttpServletRequest request, Model model) {
-//		return "home";	
-//	}
 
 	@RequestMapping(value= "/registration", method=RequestMethod.GET)
 	public String registration(HttpServletRequest request, Model model) {
