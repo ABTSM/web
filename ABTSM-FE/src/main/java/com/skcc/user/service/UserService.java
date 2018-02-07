@@ -24,4 +24,10 @@ public class UserService {
 	public  List<User> getUser(String userId){
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/u1/%s", serviceUrl, userId), User[].class));
 	}
+
+	public User getUserByIdPwd(User loginUser) {
+		String userId = loginUser.getUserId();
+		String pwd = loginUser.getPwd();
+		return restTemplate.getForObject(String.format("%s/u1/%s/pw/%s", serviceUrl, userId, pwd ), User.class);
+	}
 }

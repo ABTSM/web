@@ -23,8 +23,7 @@ public class UserRestController {
 	}
 	
 	@RequestMapping(path="/u1/{userId}/pw/{pwd}", method=RequestMethod.GET)
-	public List<User> getUser(@PathVariable(name="userId") String userId, @PathVariable(name="pwd")  String pwd){
-
+	public User getUser(@PathVariable(name="userId") String userId, @PathVariable(name="pwd")  String pwd){
 
 		System.out.println("userId : "+userId);
 		System.out.println("pwd : "+pwd);
