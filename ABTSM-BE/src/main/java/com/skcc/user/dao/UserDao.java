@@ -10,7 +10,7 @@ import com.skcc.user.vo.User;
 @Mapper
 public interface UserDao {
 
-	@Select("select * from user where userId = #{userId}")
-	public List<User> selectUser(String userId) ;
+	@Select("select * from user where userId = #{userId} and pwd=#{pwd}")
+	public List<User> selectUser(User user) ;
 	
 }

@@ -16,9 +16,9 @@ public class UserService {
 		this.userDao = userDao;
 	}
 	
-	public List<User> getUser(String userId) {
+	public List<User> getUser(User user ) {
 		
-		return userDao.selectUser(userId);
+		return userDao.selectUser(user);
 	}
 	
 	

@@ -22,10 +22,16 @@ public class UserRestController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(path="/u1/{userId}", method=RequestMethod.GET)
-	public List<User> getUser(@PathVariable(name="userId") String userId){
-		logger.info("====="+userId+"======");
-		return userService.getUser(userId);
+	@RequestMapping(path="/u1/{userId}/pw/{pwd}", method=RequestMethod.GET)
+	public List<User> getUser(@PathVariable(name="userId") String userId, @PathVariable(name="pwd")  String pwd){
+
+
+		System.out.println("userId : "+userId);
+		System.out.println("pwd : "+pwd);
+		User user = new User();
+		user.setUserId(userId);
+		user.setPwd(pwd);
+		return userService.getUser(user);
 		
 	}
 	
