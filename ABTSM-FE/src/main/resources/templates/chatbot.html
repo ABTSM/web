@@ -123,10 +123,10 @@
 	<script src="js/loading.min.js"></script>
 
 	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 	<script>
+	<![CDATA[
 		/* 함수명 고정(수정불가) */
 		function process(result) {
 			var s = ""; //초기화
@@ -136,11 +136,12 @@
 				s = "대화모델에 해당 입력에 대한 응답이 없습니다. 대화 모델을 확인 해 주세요."
 			} else {
 				if (result.output.type == 'Link') { //DB 또는 API 연동시
-					for(var key in result.outut.text[0].result){
+					for(var i = 0; i<result.output.text[0].result.length;++i)
+					{
 						s += "<img src='" + key + "width='50' height='30'>";
 					}
 				} else { //일반 대화시
-					for ( var key in result.output.text) {
+					for (var key in result.output.text) {
 						s += result.output.text[key];
 						s += "<br />";
 					}
@@ -164,15 +165,12 @@
 
 			$("#style-3").append("<div class='clear'></div>");
 		}
+		]]>
 	</script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#chatbotwrapper').OEngine({
-				//width   :  '100%',
-				//height  :  '560px',
-				//bgColor :  '#efefef',
-				//ctitle  :  "Aibril Chatbot",
 				firstMsg : "안녕하세요. Aibril Chatbot 입니다.",
 				api_key : "fb7da8f3-ec06-4320-9bac-21206322f4fe"
 			});
