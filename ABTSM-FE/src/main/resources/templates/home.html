@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1"/>
+		
+		<title>Advanced Base Transceiver Station Manager</title>
+		
+		<!-- Bootstrap Core CSS -->
+		<link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+		
+		<!-- MetisMenu CSS -->
+		<link href="vendor/metisMenu/metisMenu.min.css" rel="stylesheet"/>
+		
+		<!-- Custom CSS -->
+		<link href="dist/css/sb-admin-2.css" rel="stylesheet"/>
+		
+		<!-- Custom Fonts -->
+		<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- Navigation -->
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/home">ABTMS</a>
+			</div>
+			
+			<ul class="nav navbar-top-links navbar-right">
+				<li class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-user fa-fw"></i>
+						<i class="fa fa-caret-down"></i>
+					</a>
+					<ul class="dropdown-menu dropdown-user">
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
+						<li class="divider"></li>
+						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>	Logout</a></li>
+					</ul>
+				</li>
+			</ul>
+
+			<div class="navbar-default sidebar" role="navigation">
+				<div class="sidebar-nav navbar-collapse">
+					<ul class="nav" id="side-menu">
+						<li>
+							<a href="/home"><i class="fa fa-bar-chart-o fa-fw"></i>BTS<span class="fa arrow"></span></a>
+							<ul class="nav nav-second-level">
+								<li><a href="/home">Search</a></li>
+								<li><a href="/registration">Registration</a></li>
+							</ul>
+						</li>
+						<li><a href="#"><i class="fa fa-edit fa-fw"></i>ChatBot</a></li>
+						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>About</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		
+		<div id="page-wrapper">
+			<div class="row">
+				<div class="panel-default">
+					<div class="panel-body">
+						<nav class="navbar navbar-default">
+							<div class="nav nav-justified navbar-nav ">
+								<form class="navbar-form navbar-search" role="search">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
+												<span class="glyphicon glyphicon-search"></span> <span class="label-icon">Search</span> <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu pull-left" role="menu">
+												<li>
+													<a href="#"> 
+														<span class="glyphicon glyphicon-user"></span> 
+														<span class="label-icon">Address</span>
+													</a>
+												</li>
+												<li>
+													<a href="#">
+														<span class="glyphicon glyphicon-book"></span>
+														<span class="label-icon">Name</span>
+													</a>
+												</li>
+											</ul>
+										</div>
+										<input type="text" class="form-control"/>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-search btn-default">GO</button>
+										</div>
+										<div class="input-group-btn col-lg-5">
+											<button type="button" class="btn btn-default">My</button>
+											<button type="button" class="btn btn-default">All</button>
+										</div>
+									</div>
+								</form>
+							</div>
+						</nav>
+						<div id="map-canvas" style="height: 300px"></div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="panel panel-default">
+							<div class="panel-heading">BTS Information Tables</div>
+							<!-- /.panel-heading -->
+							<div class="panel-body">
+								<!-- /.table-responsive -->
+								<div class="well">
+									<h4>DataTables Usage Information</h4>
+									<p>
+										DataTables is a very flexible, advanced tables plugin for
+										jQuery. In SB Admin, we are using a specialized version of
+										DataTables built for Bootstrap 3. We have also customized the
+										table headings to use Font Awesome icons in place of images.
+										For complete documentation on DataTables, visit their website
+										at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.
+									</p>
+									<a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
+								</div>
+							</div>
+							<!-- /.panel-body -->
+						</div>
+						<!-- /.panel -->
+					</div>
+					<!-- /.col-lg-12 -->
+				</div>
+			</div>
+		</div>
+		<!-- /wrapper -->
+
+		<!-- jQuery -->
+		<script src="vendor/jquery/jquery.min.js"></script>
+
+		<!-- Bootstrap Core JavaScript -->
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Metis Menu Plugin JavaScript -->
+		<script src="vendor/metisMenu/metisMenu.min.js"></script>
+<!-- 
+		<script src="https://maps.google.com/maps/api/js?sensor=true&key=AIzaSyDY8bJCGQtcZZvI1jOwjUhcI3gbkvQDI2Y"></script>
+
+		<script>
+        var marker;
+        var infowindow;
+        var map;
+
+        function setMarker(a, b, title, html){
+            var marker;
+            marker = new google.maps.Marker({
+                map:map,
+                position: new google.maps.LatLng(a, b),
+                title: title
+            });
+            google.maps.event.addListener(marker, 'click', function() {
+                infowindow.setContent(html);
+                infowindow.open(map,marker);
+                infowindow.setposition(event.LatLng)
+            });
+        }
+
+
+
+    function initialize() {
+        var myLatlng;
+        //var map;
+        //var marker;
+
+        myLatlng = new google.maps.LatLng(35.9960144, 127.958510);
+
+
+    var mapOptions = {
+                    zoom: 7,
+                    center: myLatlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+
+        };
+
+        map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+        var contentString ='<p style="line-height: 20px;">Place</p><p>Number</p>';
+
+        var infowindow = new google.maps.InfoWindow({
+                content: contentString
+        });
+
+        marker = new google.maps.Marker({
+                position: myLatlng,
+                map: map,
+                title: 'Marker'
+        });
+
+    //    infowindow.open(map, marker);
+        setMarker(36.628030, 127.488269, "Six-street market", "Six-street market");
+        setMarker(36.649759, 127.511787, "Cheongju Museum", "Cheongju Museum");
+        setMarker(35.649759, 126.511787, "Cheaaa", "Cheongju Mussm");
+
+
+        google.maps.event.addListener(marker, 'click', function () {
+                infowindow.open(map, marker);
+        });
+
+		}
+</script> -->
+	</body>	
+</html>
