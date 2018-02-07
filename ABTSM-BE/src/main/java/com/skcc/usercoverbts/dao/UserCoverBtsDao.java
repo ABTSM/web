@@ -2,6 +2,7 @@ package com.skcc.usercoverbts.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
@@ -15,7 +16,7 @@ public interface UserCoverBtsDao {
 	public List<UserCoverBts> selectBtsSsidByUserId(String userId) ;
 	
 	//insert 
-	@Select("insert into USER_COVER_BTS (userId, ssid) Values ( userId=#{userId}, ssid=#{ssid} )")
+	@Insert("insert into USER_COVER_BTS (userId, ssid) values (#{userId}, #{ssid} )")
 	public int insertUserCoverBts(UserCoverBts userCoverBts);
 	
 }
