@@ -27,7 +27,7 @@ public interface BtsDao {
 
 	// insert BTS
 	@Insert("insert into BTS (ssid, latitude, longitude, altitude, streetAddress, secondaryUnit, enrollDate, modifyDate) "
-			+ "VALUES	(#{ssid}, #{latitude}, #{longitude}, #{altitude}, #{streetAddress}, #{secondaryUnit}, #{enrollDate}, #{modifyDate}")
+			+ " VALUES	(#{ssid}, #{latitude}, #{longitude}, #{altitude}, #{streetAddress}, #{secondaryUnit}, #{enrollDate}, #{modifyDate})")
 	public int insertBts(Bts bts);
 
 	// update BTS

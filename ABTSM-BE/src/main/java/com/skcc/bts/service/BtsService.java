@@ -41,6 +41,7 @@ public class BtsService {
 		return btsDao.insertBts(bts);
 	}
 	public int createUserCoverBts(UserCoverBts userCoverBts) {
+		System.out.println(userCoverBts.getSsid()+" +++"+userCoverBts.getUserId());
 		return userCoverBtsDao.insertUserCoverBts(userCoverBts);
 	}
 	// update bts

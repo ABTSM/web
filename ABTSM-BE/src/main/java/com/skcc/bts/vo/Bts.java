@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Bts {
 	private String ssid;					//기지국 식별번호 
 	private double latitude;				//위도 
-	private double longitutde;			//경도 
+	private double longitude;			//경도 
 	private int altitude;				//고도 
 	private String 	streetAddress;		//기본 도로명 주소 
 	private String 	secondaryUnit;		//상세 
@@ -27,11 +27,11 @@ public class Bts {
 	public void setLatitude(double latitude) {
 		this.latitude = latitude;
 	}
-	public double getLongitutde() {
-		return longitutde;
+	public double getLongitude() {
+		return longitude;
 	}
-	public void setLongitutde(double longitutde) {
-		this.longitutde = longitutde;
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
 	}
 	public String getStreetAddress() {
 		return streetAddress;
@@ -62,6 +62,12 @@ public class Bts {
 	}
 	public void setModifyDate(String modifyDate) {
 		this.modifyDate = modifyDate;
+	}
+	@Override
+	public String toString() {
+		return "Bts [ssid=" + ssid + ", latitude=" + latitude + ", longitude=" + longitude + ", altitude=" + altitude
+				+ ", streetAddress=" + streetAddress + ", secondaryUnit=" + secondaryUnit + ", enrollDate=" + enrollDate
+				+ ", modifyDate=" + modifyDate + "]";
 	}
 
 	
