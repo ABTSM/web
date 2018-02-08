@@ -10,6 +10,11 @@
 	position: relative;
 }
 
+.custom-height-modal {
+	height: 680px;
+	width: 110%;
+}
+
 body {
 	background-color: #f8f8f8;
 }

@@ -19,6 +19,9 @@
 		
 		<!-- Custom Fonts -->
 		<link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+		
+		<!-- chat-bot css -->
+		<link rel="stylesheet" href="css/style.css" />
 	</head>
 
 	<body>
@@ -34,11 +37,11 @@
 		</div>
 
 		<ul class="nav navbar-top-links navbar-right">
-			<li><a href="/chatbot"><i class="fa fa-user fa-fw"></i> Chat-bot</a></li>
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
-				<i class="fa fa-user fa-fw"></i>
-				<i class="fa fa-caret-down"></i>
+			<li><a href="#chatbotModal" data-toggle="modal"
+				data-target="#chatbotModal"><i class="fa">chatbot</i></a></li>
+			<li class="dropdown"><a class="dropdown-toggle"
+				data-toggle="dropdown" href="#"> <i class="fa fa-user fa-fw"></i>
+					<i class="fa fa-caret-down"></i>
 			</a>
 				<ul class="dropdown-menu dropdown-user">
 					<li><a href="#"><i class="fa fa-user fa-fw"></i> User
@@ -141,6 +144,34 @@
 			<!-- /.row -->
 		</div>
 		<!-- /#page-wrapper -->
+		
+			<!-- Modal -->
+	<div class="modal fade" id="chatbotModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body custom-height-modal">
+					<!--sticky-->
+					<div class="row no-border">
+						<div class="sixteen wide tablet eight wide computer column"
+							style="text-align: center"></div>
+					</div>
+					<!-- chatting window start -->
+					<div id="chatbotwrapper" class="chatbotwrap"
+						style="height: 90%; width: 90%;"></div>
+
+					<!-- chatting window end -->
+				</div>
+			</div>
+		</div>
+	</div>
+		
 
 
 		<!-- jQuery -->
@@ -151,6 +182,10 @@
 
 		<!-- Metis Menu Plugin JavaScript -->
 		<script src="vendor/metisMenu/metisMenu.min.js"></script>
+		
+			<!-- js 추가(chat-bot) -->
+	<script src="js/app2.min.js"></script>
+	<script src="js/loading.min.js"></script>
 		
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 		
@@ -289,5 +324,247 @@
 			}
 			/*]]>*/
 		</script>
+		
+			<script>
+		$(".btn[data-target='#myModal']")
+				.click(
+						function() {
+							var columnHeadings = $("thead th").map(function() {
+								return $(this).text();
+							}).get();
+							columnHeadings.pop();
+							var columnValues = $(this).parent().siblings().map(
+									function() {
+										return $(this).text();
+									}).get();
+							var modalBody = $('<div id="modalContent"></div>');
+							var modalForm = $('<form role="form" name="modalForm" action="index.html" method="post"></form>');
+							$
+									.each(
+											columnHeadings,
+											function(i, columnHeader) {
+												var formGroup = $('<div class="form-group"></div>');
+												formGroup
+														.append('<label for="'+columnHeader+'">'
+																+ columnHeader
+																+ '</label>');
+												formGroup
+														.append('<input class="form-control" name="'+columnHeader+i+'" id="'+columnHeader+i+'" value="'+columnValues[i]+'" />');
+												modalForm.append(formGroup);
+											});
+							modalBody.append(modalForm);
+							$('.modal-body').html(modalBody);
+						});
+		$('.modal-footer .btn-primary').click(function() {
+			$('form[name="modalForm"]').submit();
+		});
+
+		$(document).ready(function() {
+			var table = $('#example').DataTable();
+
+			$('#example tbody').on('click', 'tr', function() {
+				if ($(this).hasClass('selected')) {
+					$(this).removeClass('selected');
+				} else {
+					table.$('tr.selected').removeClass('selected');
+					$(this).addClass('selected');
+				}
+			});
+
+			$('#button').click(function() {
+				table.row('.selected').remove().draw(false);
+			});
+
+		});
+	</script>
+
+
+	<script>
+		function setMarker(a, b, title, html) {
+			var marker;
+			console.log(a + "  " + b);
+			marker = new google.maps.Marker({
+				map : map,
+				position : new google.maps.LatLng(a, b),
+				title : title
+			});
+			google.maps.event.addListener(marker, 'load', function() {
+				infowindow.setContent(html);
+				infowindow.open(map, marker);
+				infowindow.setposition(event.LatLng)
+			});
+		}
+	</script>
+
+
+	<!-- google Maps API -->
+	<script>
+		var marker;
+		var infowindow;
+		var map;
+		var markers = [];
+		function initialize() {
+			var myLatlng;
+
+			myLatlng = new google.maps.LatLng(36.9960144, 127.958510);
+			//var map;
+			//var marker;
+			console.log("--=----");
+			//
+			var mapOptions = {
+				zoom : 7,
+				center : myLatlng,
+				mapTypeId : google.maps.MapTypeId.ROADMAP
+
+			};
+
+			map = new google.maps.Map(document.getElementById('map-canvas'),
+					mapOptions);
+
+			var contentString = '<p style="line-height: 20px;">Place</p><p>Number</p>';
+
+			var infowindow = new google.maps.InfoWindow({
+				content : contentString
+			});
+
+			marker = new google.maps.Marker({
+				position : myLatlng,
+				map : map,
+				title : 'Marker'
+			});
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map, marker);
+			});
+			marker.setMap(null);
+		}
+
+		//google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
+
+	<!-- event function  -->
+	<script>
+		//my button event 함수 
+		$(".panel-default.map").on(
+				"click",
+				"._my",
+				function(url) {
+					$.ajax({
+						method : "GET",
+						url : '/bts/my',
+						success : function(data) {
+							console.log(data[0] + " / " + data[0].ssid + " "
+									+ data[0].latitude + " "
+									+ data[0].longitude);
+							setMarker(data[0].latitude, data[0].longitude,
+									data[0].streetAddress,
+									data[0].secondaryUnit);
+							setMarker(data[1].latitude, data[1].longitude,
+									data[1].streetAddress,
+									data[1].secondaryUnit);
+							setMarker(data[2].latitude, data[2].longitude,
+									data[2].streetAddress,
+									data[2].secondaryUnit);
+							setMarker(data[3].latitude, data[3].longitude,
+									data[3].streetAddress,
+									data[3].secondaryUnit);
+						}
+					});
+				});
+		//page onload
+
+		var entry = $('.data-table-entry');
+
+		$(document).ready(
+				function(url) {
+					//google.maps.event.addDomListener(window, 'load', initialize); 
+					initialize();
+					var Latlng;
+
+					$.ajax({
+						method : "GET",
+						url : '/bts/my',
+
+						success : function(data) {
+
+							/*<![CDATA[*/
+							for (var i = 0; i < data.length; i++) {
+								/*]]>*/
+								setMarker(data[i].latitude, data[i].longitude,
+										data[i].streetAddress,
+										data[i].secondaryUnit);
+								var str = ' <tr><td>' + data[i].ssid
+										+ '</td><td>' + data[i].latitude
+										+ '</td><td>' + data[i].longitude
+										+ '</td><td>' + data[i].streetAddress
+										+ ' </td><td>' + data[i].secondaryUnit
+										+ '</td><td>' + data[i].modifyDate
+										+ '</td></tr> ';
+								entry.append(str);
+
+							}
+
+						}
+					});
+				});
+	</script>
+
+
+	<script>
+		/* 함수명 고정(수정불가) */
+		/*chat-bot */
+
+		function process(result) {
+			var s = ""; //초기화
+
+			//무응답 처리
+			if (result.output.text.length == 0) {
+				s = "대화모델에 해당 입력에 대한 응답이 없습니다. 대화 모델을 확인 해 주세요."
+			} else {
+				if (result.output.type == "Link") { //DB 또는 API 연동시
+					/*<![CDATA[*/
+					for (var i = 0; i < result.output.text[0].result.length; i++) {
+						s += "<img src='" + result.output.text[0].result[i] + "' width='50' height='30'>"
+					}
+				} else { //일반 대화시
+					for ( var key in result.output.text) {
+						s += result.output.text[key];
+						s += "<br />";
+					}
+				}
+			}
+			/*]]>*/
+			var time = new Date(Date.now());
+			var option = {
+				hour : "2-digit",
+				minute : "2-digit"
+			};
+			var timeStamp = time.toLocaleTimeString("en-US", option);
+
+			$("#style-3")
+					.append(
+							"<div class='talk_isac'><div class='talk_isac_box'>"
+									+ s
+									+ "</div><div class='talk_isac_time'>"
+									+ timeStamp
+									+ "</div><div class='talk_isac_icon'><span class='glyphicon glyphicon-headphones' aria-hidden='true'></span></div></div>");
+
+			$("#style-3").append("<div class='clear'></div>");
+		}
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#chatbotwrapper').OEngine({
+				//width   :  '100%',
+				//height  :  '560px',
+				//bgColor :  '#efefef',
+				//ctitle  :  "Aibril Chatbot",
+				firstMsg : "안녕하세요. Aibril Chatbot 입니다.",
+				api_key : "fb7da8f3-ec06-4320-9bac-21206322f4fe"
+			});
+		});
+	</script>
+		
+		
 	</body>	
 </html>

@@ -2407,7 +2407,7 @@ body.login{
     position: absolute;
     margin-right: -250px;
 }
-
+/*
 .sidebar-nav {
 	position: absolute;
 	top: 5px;
@@ -2460,7 +2460,7 @@ body.login{
 	padding :10px 8px 7px 14px;
 	border-radius : 15px 0 0 15px;
 	color:#fff;
-}
+}*/
 .side_icon {
 	background:url(../images/icon_sidebar.png) no-repeat;
 	width:33px;
