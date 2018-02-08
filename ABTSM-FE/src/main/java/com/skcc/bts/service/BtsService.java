@@ -21,5 +21,9 @@ public class BtsService {
 	public List<Bts> getBtsByUserId(String userId) {
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/my/%s", serviceUrl, userId), Bts[].class));
 	}
-
+	
+	public List<Bts> CheckByBtsId(String btsId){
+		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/%s", serviceUrl, btsId), Bts[].class));
+	}
+	
 }

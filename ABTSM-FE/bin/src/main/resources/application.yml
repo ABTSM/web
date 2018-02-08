@@ -1,0 +1,13 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  application:
+    name: ABTSM-FE
+    
+management:
+  security:
+    enabled: false
+    
+rest:
+  address:  http://localhost:8090

@@ -22,42 +22,46 @@
 
 	<body>
 		<!-- Navigation -->
-		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation"
+			style="margin-bottom: 0">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target=".navbar-collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="/home">ABTMS</a>
 			</div>
 			
 			<ul class="nav navbar-top-links navbar-right">
+				<li>
+					<a href="#chatbotModal" data-toggle="modal" data-target="#chatbotModal"><i class="fa">chatbot</i></a>
+				</li>
 				<li class="dropdown">
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#"> 
 						<i class="fa fa-user fa-fw"></i>
 						<i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a></li>
+						<li><a href="#"><i class="fa fa-user fa-fw"></i> User
+								Profile</a></li>
 						<li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li>
 						<li class="divider"></li>
-						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>	Logout</a></li>
+						<li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i>
+								Logout</a></li>
 					</ul>
 				</li>
 			</ul>
-
+	
 			<div class="navbar-default sidebar" role="navigation">
 				<div class="sidebar-nav navbar-collapse">
 					<ul class="nav" id="side-menu">
-						<li>
-							<a href="/home"><i class="fa fa-bar-chart-o fa-fw"></i>BTS<span class="fa arrow"></span></a>
+						<li><a href="/home"><i class="fa fa-bar-chart-o fa-fw"></i>BTS<span
+								class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
 								<li><a href="/home">Search</a></li>
 								<li><a href="/registration">Registration</a></li>
-							</ul>
-						</li>
-						<li><a href="#"><i class="fa fa-edit fa-fw"></i>ChatBot</a></li>
-						<li><a href="#"><i class="fa fa-files-o fa-fw"></i>About</a></li>
+							</ul></li>
+						<li><a href="/about"><i class="fa fa-files-o fa-fw"></i>About</a></li>
 					</ul>
 				</div>
 			</div>
@@ -67,42 +71,6 @@
 			<div class="row">
 				<div class="panel-default map">
 					<div class="panel-body">
-						<!-- <nav class="navbar navbar-default">
-							<div class="nav nav-justified navbar-nav ">
-								<form class="navbar-form navbar-search" role="search">
-									<div class="input-group">
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-search btn-default dropdown-toggle" data-toggle="dropdown">
-												<span class="glyphicon glyphicon-search"></span> <span class="label-icon">Search</span> <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu pull-left" role="menu">
-												<li>
-													<a href="#"> 
-														<span class="glyphicon glyphicon-user"></span> 
-														<span class="label-icon">Address</span>
-													</a>
-												</li>
-												<li>
-													<a href="#">
-														<span class="glyphicon glyphicon-book"></span>
-														<span class="label-icon">Name</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-										<input type="text" class="form-control"/>
-										<div class="input-group-btn">
-											<button type="button" class="btn btn-search btn-default">GO</button>
-										</div>
-										<div class="input-group-btn col-lg-5">
-											<button type="button" class="btn btn-default _my">My</button>
-											<button type="button" class="btn btn-default">All</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</nav> 
-						-->
 						<div id="map-canvas" style="height: 300px"></div>
 					</div>
 				</div>
@@ -127,7 +95,6 @@
                         </thead>
 
                         <tbody class="data-table-entry">
-                       <!--  <tr><td>bts00001</td><td>39.xxxx</td><td>127.xxxxx</td><td>도로 </td><td>상세 </td><td>15:33:40</td></tr>-->
                       
                         </tbody> 
                 </table>
@@ -142,6 +109,25 @@
 		</div>
 		<!-- /wrapper -->
 		
+		
+		<!-- Modal -->
+		<div class="modal fade" id="chatbotModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        modal body
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
 		
 
 		<!-- jQuery -->
@@ -232,23 +218,6 @@
         var infowindow;
         var map;
 		var markers=[];
-        /* 
-        	function setMarker(a, b, title, html){
-            var marker;
-            console.log(a+ "  "+b);
-            marker = new google.maps.Marker({
-                map:map,
-                position: new google.maps.LatLng(a, b),
-                title: title
-            });
-            google.maps.event.addListener(marker, 'click', function() {
-                infowindow.setContent(html);
-                infowindow.open(map,marker);
-                infowindow.setposition(event.LatLng)
-            });
-        }
- */
-	
 	    function initialize() {
 	        var myLatlng;
 	        
@@ -277,15 +246,7 @@
 	                map: map,
 	                title: 'Marker'
 	        });  
-			
-	    //    infowindow.open(map, marker);
-	       
-	  //      setMarker(36.628030, 127.488269, "Six-street market", "Six-street market");
-	  //      setMarker(36.649759, 127.511787, "Cheongju Museum", "Cheongju Museum");
-	  //      setMarker(35.649759, 126.511787, "Cheaaa", "Cheongju Mussm");
-	 
-	
-	        google.maps.event.addListener(marker, 'click', function () {
+			        google.maps.event.addListener(marker, 'click', function () {
 	                infowindow.open(map, marker);
 	        });
 			marker.setMap(null);
@@ -298,7 +259,6 @@
 	
 	<!-- event function  -->
 	<script >
-
 		//my button event 함수 
 		$(".panel-default.map").on("click", "._my", 	function(url){
 			$.ajax({
@@ -328,7 +288,6 @@
 				
 				success:function(data){
 					
-					
 					/*<![CDATA[*/
 					for(var i=0; i<data.length; i++){
 					/*]]>*/
@@ -341,38 +300,6 @@
 					
 				}
 			});
-			
-			
-/* 
-			$('#data-table').DataTable({
-				ajax : '/bts/my',
-				columns:[
-					{ title: 'ssid'},
-					{ title: 'latitude'},
-					{ title: 'longitude'},
-					{ title: 'altitude' },
-					{ title: 'streetAddress'},
-					{ title: 'secondaryUnit'},
-					{title : 'enrollDate'},
-					{ title: 'modifyDate'}
-				]
-			}); */
-				
-			
-			/* $('#data-table').DataTable({
-				data : entry,
-				columns:[
-					{ title: "BTS ID"},
-					{ title: "latitude"},
-					{ title: "longitude"},
-					{ title: "altitude" },
-					{ title: "streetAddress"},
-					{ title: "secondaryUnit"},
-					{ title: "enrollDate"},
-					{ title: "ModifiedTime"}
-				]
-			}); */
-			
 		}); 
 		
 	</script>		

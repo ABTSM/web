@@ -69,45 +69,62 @@
 		<div id="page-wrapper">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="page-header">Registration</h1>
+					<h1 class="page-header">BTS 위치 정보 등록</h1>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
 					<div class="panel panel-default">
-						<div class="panel-heading">Basic Form Elements</div>
+						<div class="panel-heading">BTS 위치 정보</div>
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-lg-6">
-									<form role="form">
+									<!-- 등록 FORM  -->
+									<form class="form-horizontal">
 										<div class="form-group">
-											<label>USER ID</label>
-											<p class="form-control-static">email@example.com</p>
-										</div>
-										
-										<div class="form-group">
-											<label>SSID</label> <input class="placeholder"/>
-											<button type="submit" class="btn btn-default">중복조회</button>
-											<p class="help-block">ex) BTS0000</p>
-										</div>
-										
-										<div class="form-group">
-											<input type="text" id="sample2_postcode" placeholder="우편번호"/>
-											<input type="button" onclick="sample2_execDaumPostcode()" value="우편번호 찾기"/>
-											<input type="text" id="sample2_address" placeholder="한글주소"/>
-											<input type="text" id="sample2_addressEnglish" placeholder="영문주소"/>
-											<div id="layer" style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
+										    <label for="input_bts_id" class="col-sm-2 control-label">BTS-ID</label>
+										    <div class="col-sm-8">
+										      <input type ="text" class="form-control" id="input_bts_id"/>
+										    </div>
+										    <div class="col-sm-2">
+										      <div class="btn btn-default" id="btn_id_chk" onclick="onCheckId()">중복조회</div>
+										    </div>
+									  	</div>
+									  	
+									  	<div class="form-group">
+									  		<label for="sample2_postcode" class="col-sm-2 control-label">우편번호</label> 
+									  		<div class="col-sm-8">
+										    		<input type ="text" class="form-control" id="sample2_postcode"/>
+										    	</div>
+										    	<div class="col-sm-2">
+												<div class="btn btn-default" id="btn_find_post" onclick="sample2_execDaumPostcode()">우편번호 찾기</div>
+										    	</div>
+									  	</div>	
+									  	
+									  	<div class="form-group">
+									  		<label for="sample2_address" class="col-sm-2 control-label">주소</label> 
+									  		<div class="col-sm-10">
+										    		<input type ="text" class="form-control" id="sample2_address"/>
+										    	</div>
+										    	<div id="layer" style="display: none; position: fixed; overflow: hidden; z-index: 1; -webkit-overflow-scrolling: touch;">
 												<img src="images/close.png" id="btnCloseLayer" style="cursor: pointer; position: absolute; right: -3px; top: -3px; z-index: 1" onclick="closeDaumPostcode()" alt="닫기 버튼"/>
 											</div>
-										</div>
-
-										<div class="form-group">
-											<label>Text area</label>
-											<textarea class="form-control" rows="3"></textarea>
-										</div>
-										<button type="submit" class="btn btn-primary">등록</button>
-										<button type="reset" class="btn btn-primary">초기화</button>
+									  	</div>
+									  	
+									  	<div class="form-group">
+									  		<label for="sample2_address" class="col-sm-2 control-label">상세주소</label> 
+									  		<div class="col-sm-10">
+										    		<input type ="text" class="form-control" id="sample2_address2"/>
+										    	</div>
+									  	</div>
+										  <div class="form-group">
+										    <div class="col-sm-offset-2 col-sm-10">
+												<button type="reset" class="btn btn-default">초기화</button>
+												<button type="submit" class="btn btn-primary">등록</button>
+										    </div>
+										  </div>
 									</form>
+									
 								</div>
 								<!-- /.col-lg-6 (nested) -->
 								<div class="col-lg-6"></div>
@@ -136,6 +153,8 @@
 		<script src="vendor/metisMenu/metisMenu.min.js"></script>
 		
 		<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+		
+		<!-- 우편번호조회 -->
 		<script>
 		// 우편번호 찾기 화면을 넣을 element
 		var element_layer = document.getElementById('layer');
@@ -204,9 +223,9 @@
 		// resize이벤트나, orientationchange이벤트를 이용하여 값이 변경될때마다 아래 함수를 실행 시켜 주시거나,
 		// 직접 element_layer의 top,left값을 수정해 주시면 됩니다.
 		function initLayerPosition() {
-			var width = 500; //우편번호서비스가 들어갈 element의 width
-			var height = 600; //우편번호서비스가 들어갈 element의 height
-			var borderWidth = 5; //샘플에서 사용하는 border의 두께
+			var width = 380; //우편번호서비스가 들어갈 element의 width
+			var height = 456; //우편번호서비스가 들어갈 element의 height
+			var borderWidth = 0; //샘플에서 사용하는 border의 두께
 		
 			// 위에서 선언한 값들을 실제 element에 넣는다.
 			element_layer.style.width = width
@@ -223,5 +242,52 @@
 		}
 		</script>
 		
+		<!--중복조회-->
+		<script>
+		/*<![CDATA[*/
+			function onCheckId(){
+				var btsId = $('#input_bts_id')[0].value;
+				$.ajax({
+				  type: "GET",
+				  url: "/bts/chkBtsId/"+btsId,
+				  success: function(data, textStatus, jqXHR){
+					  if(data.length<1){
+						 alert("정상적으로 등록이 가능합니다.") 
+					  }
+					  else{
+						alert("이미 등록된 아이디입니다.")
+					  }
+				  },
+				  error: function(jqXHR, textStatus, errorThrown){
+					  console.log(errorThrown);
+					  console.log(textStatus);
+					  console.log(jqXHR);
+				  }
+				});
+			}
+			/*]]>*/
+		</script>
+		
+		
+		<!--중복조회-->
+		<script>
+		/*<![CDATA[*/
+			function registBfs(){
+				var btsId = $('#input_bts_id')[0].value;
+				$.ajax({
+				  type: "POST",
+				  url: "/bts/registration",
+				  data:{
+					"id":"test"  
+				  },
+				  success: function(data, textStatus, jqXHR){
+					  console.log(data);
+				  },
+				  error: function(jqXHR, textStatus, errorThrown){
+				  }
+				});
+			}
+			/*]]>*/
+		</script>
 	</body>	
 </html>
