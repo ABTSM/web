@@ -149,30 +149,20 @@
 
 
 	<!-- jQuery -->
-	<script src="../vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/jquery/jquery.min.js"></script>
 
 	<!-- Bootstrap Core JavaScript -->
-	<script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 
 	<!-- Metis Menu Plugin JavaScript -->
-	<script src="../vendor/metisMenu/metisMenu.min.js"></script>
-
-	<!-- Flot Charts JavaScript -->
-	<script src="../vendor/flot/excanvas.min.js"></script>
-	<script src="../vendor/flot/jquery.flot.js"></script>
-	<script src="../vendor/flot/jquery.flot.pie.js"></script>
-	<script src="../vendor/flot/jquery.flot.resize.js"></script>
-	<script src="../vendor/flot/jquery.flot.time.js"></script>
-	<script src="../vendor/flot-tooltip/jquery.flot.tooltip.min.js"></script>
-	<script src="../data/flot-data.js"></script>
+	<script src="vendor/metisMenu/metisMenu.min.js"></script>
 
 	<!-- Custom Theme JavaScript -->
-	<script src="../dist/js/sb-admin-2.js"></script>
+	<script src="dist/js/sb-admin-2.js"></script>
 
 	<!-- js 추가(chat-bot) -->
 	<script src="js/app2.min.js"></script>
 	<script src="js/loading.min.js"></script>
-
 
 	<script>
 		/* 함수명 고정(수정불가) */
@@ -181,12 +171,12 @@
 		function process(result) {
 			var s = ""; //초기화
 
+			/*<![CDATA[*/
 			//무응답 처리
 			if (result.output.text.length == 0) {
 				s = "대화모델에 해당 입력에 대한 응답이 없습니다. 대화 모델을 확인 해 주세요."
 			} else {
 				if (result.output.type == "Link") { //DB 또는 API 연동시
-					/*<![CDATA[*/
 					for (var i = 0; i < result.output.text[0].result.length; i++) {
 						s += "<img src='" + result.output.text[0].result[i] + "' width='50' height='30'>"
 					}
@@ -197,7 +187,6 @@
 					}
 				}
 			}
-			/*]]>*/
 			var time = new Date(Date.now());
 			var option = {
 				hour : "2-digit",
@@ -205,18 +194,16 @@
 			};
 			var timeStamp = time.toLocaleTimeString("en-US", option);
 
-			$("#style-3")
-					.append(
-							"<div class='talk_isac'><div class='talk_isac_box'>"
-									+ s
+			$("#style-3").append("<div class='talk_isac'><div class='talk_isac_box'>"+ s
 									+ "</div><div class='talk_isac_time'>"
 									+ timeStamp
 									+ "</div><div class='talk_isac_icon'><span class='glyphicon glyphicon-headphones' aria-hidden='true'></span></div></div>");
 
 			$("#style-3").append("<div class='clear'></div>");
+			/*]]>*/
 		}
 	</script>
-
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#chatbotwrapper').OEngine({

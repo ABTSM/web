@@ -26,5 +26,25 @@ public class BtsService {
 	public List<Bts> CheckByBtsId(String btsId){
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/%s", serviceUrl, btsId), Bts[].class));
 	}
+
+	public Bts registBts(Bts bts){
+		String url = String.format("%s/bts/d1/enroll/%s", serviceUrl,bts.getSsid());
+		System.out.println(url);
+		System.out.println(bts);
+		return restTemplate.postForObject(url, bts, Bts.class);		
+	}
+
+	public Bts updateBts(Bts bts){
+		String url = String.format("%s/bts/d1/%s", serviceUrl,bts.getSsid());
+		System.out.println(url);
+		System.out.println(bts);
+		restTemplate.put(url, bts, Bts.class);	//조율 필요
+		return bts;
+	}
+	public void deleteBts(String id){
+		String url = String.format("%s/bts/d1/%s", serviceUrl,id);
+		System.out.println(url);
+		restTemplate.delete(url);
+	}
 	
 }

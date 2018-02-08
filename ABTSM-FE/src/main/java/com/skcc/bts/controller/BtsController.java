@@ -37,7 +37,33 @@ public class BtsController {
 
 	@RequestMapping(path="/bts/registration", method = RequestMethod.POST, name="registration")
 	public Bts registration(HttpServletRequest request){
-		String id = request.getParameter("");
-		return new Bts();
+		String id = request.getParameter("id");
+		//String postCode = request.getParameter("postCode");
+		String address = request.getParameter("address");
+		String addressDetail = request.getParameter("address_detail");
+		Bts bts= new Bts();
+		bts.setSsid(id);
+		bts.setStreetAddress(address);
+		bts.setSecondaryUnit(addressDetail);
+		return btsService.registBts(bts);
 	}
+
+	@RequestMapping(path="/bts/update", method = RequestMethod.POST, name="update")
+	public Bts update(HttpServletRequest request){
+		String id = request.getParameter("id");
+		String address = request.getParameter("address");
+		String addressDetail = request.getParameter("address_detail");
+		Bts bts= new Bts();
+		bts.setSsid(id);
+		bts.setStreetAddress(address);
+		bts.setSecondaryUnit(addressDetail);
+		return btsService.updateBts(bts);
+	}
+
+	@RequestMapping(path="/bts/delete/{btsId}", method = RequestMethod.GET, name="deleteBts")
+	public void deleteBts(@PathVariable(name="btsId") String btsId){
+		System.out.println(btsId);
+		btsService.deleteBts(btsId);
+	}
+	
 }

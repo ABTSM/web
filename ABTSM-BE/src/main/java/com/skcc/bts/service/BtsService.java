@@ -49,7 +49,10 @@ public class BtsService {
 		bts.setModifyDate(createDate());
 		return btsDao.updateBts(bts);
 	}
-
+	// delete bts
+	public int deleteBts(String id) {
+		return btsDao.deleteBtsById(id);
+	}
 	private String createDate() {
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
