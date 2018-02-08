@@ -18,7 +18,7 @@ public class UserService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Value("${api.services.url}")
+	@Value("${rest.address}")
 	private String serviceUrl;
 	
 	public  List<User> getUser(String userId){

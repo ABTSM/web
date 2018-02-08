@@ -29,13 +29,13 @@ public class BtsRestController {
 		this.btsService = btsService;
 	}
 	
-	@RequestMapping(path = "/bts", method=RequestMethod.GET)
+	@RequestMapping(path = "/bts/d1", method=RequestMethod.GET)
 	public List<Bts> getAllBts(){
 		return btsService.getAllBts();
 	}
 	
 	// enroll 기지국 신규 등록 
-	@PostMapping(path = "/bts/my/{id}")
+	@PostMapping(path = "/bts/d1/enroll/{id}")
 	public int insertBts( @PathVariable(name="id") String userId, @RequestBody Bts bts ) {
 		String btsSsid = bts.getSsid();
 		UserCoverBts ucb = new UserCoverBts();
@@ -46,17 +46,17 @@ public class BtsRestController {
 	}
 
 	// userId에 따른 기지국 조회  
-	@RequestMapping(path = "/bts/my/{userId}", method = RequestMethod.GET)
+	@RequestMapping(path = "/bts/d1/my/{userId}", method = RequestMethod.GET)
 	public List<Bts> getBtsByUserId(@PathVariable(name = "userId") String userId) {
 		return btsService.getBtsById(userId);
 	}
 	// ssid에 따른 기지국 조회 
-	@RequestMapping(path = "/bts/{ssid}", method = RequestMethod.GET)
+	@RequestMapping(path = "/bts/d1/{ssid}", method = RequestMethod.GET)
 	public List<Bts> getBtsBySsid(@PathVariable(name = "ssid") String ssid) {
 		return btsService.getBtsBySsid(ssid);
 	}
 	// BTS update 
-	@RequestMapping(path = "/bts/{ssid}", method = RequestMethod.PUT)
+	@RequestMapping(path = "/bts/d1/{ssid}", method = RequestMethod.PUT)
 	public int updateContent(@PathVariable(name = "ssid") String ssid, @RequestBody Bts bts) {
 		bts.setSsid(ssid);
 		return btsService.updateBts(bts);

@@ -18,8 +18,8 @@ public class BtsService {
 	@Value("${api.services.url}")
 	private String serviceUrl;
 	
-	public List<Bts> getBtsByUserId(String id) {
-		return Arrays.asList(restTemplate.getForObject(String.format("%s", serviceUrl, id), Bts[].class));
+	public List<Bts> getBtsByUserId(String userId) {
+		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/my/%s", serviceUrl, userId), Bts[].class));
 	}
 
 }

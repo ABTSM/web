@@ -19,7 +19,6 @@ import com.skcc.user.vo.User;
 @Controller
 public class HomeController {
 	
-//	@Value("{api.bff.services}")
 	@Value("{rest.addreess}")
 	private String serviceUrl;
 	@Autowired
@@ -52,7 +51,6 @@ public class HomeController {
 			return "redirect:/home";
 		}else {
 			System.out.println("confirmUser :"+confirmUser.getUserId());
-//			request.setAttribute("userId", confirmUser.getUserId());
 			session.setAttribute("userId", confirmUser.getUserId());
 		}
 		return "redirect:/home";
@@ -60,6 +58,8 @@ public class HomeController {
 	
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", "09801");
 		return "home";	
 	}
 
