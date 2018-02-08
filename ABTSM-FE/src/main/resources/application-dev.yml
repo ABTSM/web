@@ -6,4 +6,4 @@ api:
   bff:
     path: /
   services:
-    # url: http://awesome-media-backend.paas.skcc.com
+    url: http://abtsm-be.paas.sk.com

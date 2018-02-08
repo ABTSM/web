@@ -15,9 +15,10 @@ public class BtsService {
 	@Autowired
 	private RestTemplate restTemplate;
 
+//	@Value("${api.services.url}")
+//	private String serviceUrl="http://localhost:8090";
 	@Value("${api.services.url}")
 	private String serviceUrl;
-	
 	public List<Bts> getBtsByUserId(String userId) {
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/my/%s", serviceUrl, userId), Bts[].class));
 	}

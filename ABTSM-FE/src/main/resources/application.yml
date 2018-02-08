@@ -10,4 +10,4 @@ management:
     enabled: false
     
 rest:
-  address:  http://localhost:8090
+  address:  

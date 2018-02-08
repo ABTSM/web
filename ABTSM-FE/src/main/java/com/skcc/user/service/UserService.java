@@ -18,9 +18,10 @@ public class UserService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Value("${rest.address}")
+//	@Value("${rest.address}")
+//	private String serviceUrl="http://localhost:8090";
+	@Value("${api.services.url}")
 	private String serviceUrl;
-	
 	public  List<User> getUser(String userId){
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/u1/%s", serviceUrl, userId), User[].class));
 	}

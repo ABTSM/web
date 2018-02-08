@@ -18,9 +18,7 @@ import com.skcc.user.vo.User;
 
 @Controller
 public class HomeController {
-	
-	@Value("{rest.addreess}")
-	private String serviceUrl;
+
 	@Autowired
 	private UserService userService;
 	
@@ -42,7 +40,7 @@ public class HomeController {
 	public String login(@RequestParam("userId") String userId,@RequestParam("pwd") String pwd, HttpServletRequest request ) {
 		HttpSession session = request.getSession();
 		
-		System.out.println("-----user info----"+userId+" / "+pwd);
+//		System.out.println("-----user info----"+userId+" / "+pwd);
 		User loginUser = new User();
 		loginUser.setUserId(userId);
 		loginUser.setPwd(pwd);
@@ -59,7 +57,9 @@ public class HomeController {
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
 	public String home(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
-		session.setAttribute("userId", "09801");
+		if(session.getAttribute("userId")==null) {
+			session.setAttribute("userId", "09801");
+		}
 		return "home";	
 	}
 
