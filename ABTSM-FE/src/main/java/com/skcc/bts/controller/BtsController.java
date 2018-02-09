@@ -39,13 +39,16 @@ public class BtsController {
 	public Bts registration(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
-		//String postCode = request.getParameter("postCode");
+		Double latitude = Double.parseDouble(request.getParameter("lat"));
+		Double longitude = Double.parseDouble(request.getParameter("lng"));
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("address_detail");
 		Bts bts= new Bts();
 		bts.setSsid(id);
 		bts.setStreetAddress(address);
 		bts.setSecondaryUnit(addressDetail);
+		bts.setLatitude(latitude);
+		bts.setLongitude(longitude);
 		return btsService.registBts(bts, (String)session.getAttribute("userId") );
 	}
 
