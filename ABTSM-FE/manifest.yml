@@ -1,5 +1,5 @@
 applications:
-- name: abtsm-fe
+- name: ABTSM-FE
   memory: 1G
   instances: 1
   host: abtsm-fe

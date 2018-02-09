@@ -12,6 +12,6 @@ spring:
     
 services:
   datasource:
-    name: abtsm-be-db-05
+    name: abtsm-be-db-05-2
     
  
