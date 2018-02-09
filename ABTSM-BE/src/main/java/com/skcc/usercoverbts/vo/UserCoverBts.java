@@ -18,5 +18,9 @@ public class UserCoverBts {
 	public void setSsid(String ssid) {
 		this.ssid = ssid;
 	}
+	@Override
+	public String toString() {
+		return "UserCoverBts [userId=" + userId + ", ssid=" + ssid + "]";
+	}
 	
 }

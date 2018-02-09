@@ -41,7 +41,6 @@ public class BtsRestController {
 		UserCoverBts ucb = new UserCoverBts();
 		ucb.setSsid(btsSsid);
 		ucb.setUserId(userId);
-		System.out.println(bts);
 		if(btsService.createBts(bts)<1) {
 			return null;
 		}

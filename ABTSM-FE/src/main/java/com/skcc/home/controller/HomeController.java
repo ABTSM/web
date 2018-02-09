@@ -46,7 +46,7 @@ public class HomeController {
 		loginUser.setPwd(pwd);
 		User confirmUser = userService.getUserByIdPwd(loginUser);
 		if(confirmUser ==null) {
-			return "redirect:/home";
+			return "redirect:/login";
 		}else {
 			System.out.println("confirmUser :"+confirmUser.getUserId());
 			session.setAttribute("userId", confirmUser.getUserId());
@@ -55,8 +55,8 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value= "/home", method=RequestMethod.GET)
-	public String home(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession();
+	public String home(HttpServletRequest request,  HttpSession session, Model model) {
+		session = request.getSession();
 		if(session.getAttribute("userId")==null) {
 			session.setAttribute("userId", "09801");
 		}
@@ -64,7 +64,7 @@ public class HomeController {
 	}
 
 	@RequestMapping(value= "/registration", method=RequestMethod.GET)
-	public String registration(HttpServletRequest request, Model model) {
+	public String registration(HttpServletRequest request,  HttpSession session, Model model) {
 		return "registration";	
 	}
 	@RequestMapping(value= "/chatbot", method=RequestMethod.GET)

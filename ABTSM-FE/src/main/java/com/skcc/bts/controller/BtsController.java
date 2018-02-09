@@ -37,6 +37,7 @@ public class BtsController {
 
 	@RequestMapping(path="/bts/registration", method = RequestMethod.POST, name="registration")
 	public Bts registration(HttpServletRequest request){
+		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
 		//String postCode = request.getParameter("postCode");
 		String address = request.getParameter("address");
@@ -45,7 +46,7 @@ public class BtsController {
 		bts.setSsid(id);
 		bts.setStreetAddress(address);
 		bts.setSecondaryUnit(addressDetail);
-		return btsService.registBts(bts);
+		return btsService.registBts(bts, (String)session.getAttribute("userId") );
 	}
 
 	@RequestMapping(path="/bts/update", method = RequestMethod.POST, name="update")

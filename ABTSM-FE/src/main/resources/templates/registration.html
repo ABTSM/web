@@ -320,6 +320,7 @@
 					"address_detail":address_detail
 				  },
 				  success: function(data, textStatus, jqXHR){
+					  console.log(data);
 					  if(data!=null){
 						  alert("등록 성공");
 							  $('#input_bts_id')[0].value='';

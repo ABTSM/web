@@ -27,10 +27,8 @@ public class BtsService {
 		return Arrays.asList(restTemplate.getForObject(String.format("%s/bts/d1/%s", serviceUrl, btsId), Bts[].class));
 	}
 
-	public Bts registBts(Bts bts){
-		String url = String.format("%s/bts/d1/enroll/%s", serviceUrl,bts.getSsid());
-		System.out.println(url);
-		System.out.println(bts);
+	public Bts registBts(Bts bts, String userId){
+		String url = String.format("%s/bts/d1/enroll/%s", serviceUrl, userId);
 		return restTemplate.postForObject(url, bts, Bts.class);		
 	}
 

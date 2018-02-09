@@ -24,9 +24,6 @@ public class UserRestController {
 	
 	@RequestMapping(path="/u1/{userId}/pw/{pwd}", method=RequestMethod.GET)
 	public User getUser(@PathVariable(name="userId") String userId, @PathVariable(name="pwd")  String pwd){
-
-		System.out.println("userId : "+userId);
-		System.out.println("pwd : "+pwd);
 		User user = new User();
 		user.setUserId(userId);
 		user.setPwd(pwd);
