@@ -36,7 +36,7 @@ public class BtsController {
 	
 
 	@RequestMapping(path="/bts/registration", method = RequestMethod.POST, name="registration")
-	public Bts registration(HttpServletRequest request){
+	public int registration(HttpServletRequest request){
 		HttpSession session = request.getSession();
 		String id = request.getParameter("id");
 		Double latitude = Double.parseDouble(request.getParameter("lat"));

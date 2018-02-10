@@ -36,18 +36,18 @@ public class BtsRestController {
 	
 	// enroll 기지국 신규 등록 
 	@PostMapping(path = "/bts/d1/enroll/{id}")
-	public Bts insertBts( @PathVariable(name="id") String userId, @RequestBody Bts bts ) {
+	public int insertBts( @PathVariable(name="id") String userId, @RequestBody Bts bts ) {
 		String btsSsid = bts.getSsid();
 		UserCoverBts ucb = new UserCoverBts();
 		ucb.setSsid(btsSsid);
 		ucb.setUserId(userId);
 		if(btsService.createBts(bts)<1) {
-			return null;
+			return 0;
 		}
 		if(btsService.createUserCoverBts(ucb)<1) {
-			return null;
+			return 0;
 		}
-		return bts;
+		return 1;
 	}
 
 	// userId에 따른 기지국 조회  

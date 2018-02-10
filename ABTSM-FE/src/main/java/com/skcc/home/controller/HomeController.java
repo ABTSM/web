@@ -25,7 +25,15 @@ public class HomeController {
 	public HomeController(UserService userService) {
 		this.userService = userService;
 	}
-	
+	@RequestMapping(value="/", method=RequestMethod.GET)
+	public String main(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model) {
+		if(session.getAttribute("userId")==null) {
+			return "login";
+		}else {
+			return "home";	
+		}
+	}
+
 	@RequestMapping(value="/index", method=RequestMethod.GET)
 	public String index(HttpServletRequest request, HttpSession session, HttpServletResponse response, Model model) {
 		if(session.getAttribute("userId")==null) {
