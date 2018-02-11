@@ -57,10 +57,14 @@ public class BtsController {
 		String id = request.getParameter("id");
 		String address = request.getParameter("address");
 		String addressDetail = request.getParameter("address_detail");
+		String longitude = request.getParameter("longitude");
+		String latitude = request.getParameter("latitude");
 		Bts bts= new Bts();
 		bts.setSsid(id);
 		bts.setStreetAddress(address);
 		bts.setSecondaryUnit(addressDetail);
+		bts.setLongitude(Double.parseDouble(longitude));
+		bts.setLatitude(Double.parseDouble(latitude));
 		return btsService.updateBts(bts);
 	}
 
