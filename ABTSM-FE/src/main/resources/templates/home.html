@@ -274,23 +274,26 @@
 		  alert( "Handler for .change() called." );
 	});
 	function onChangeAddress(){
-		console.log("도리ㅏ");
+		console.log(" 되라 좀 ");
 		var geocoder = new google.maps.Geocoder();
 		geocodeAddress(geocoder);
 	}
 	function geocodeAddress(geocoder) {
-		var address = $("#sample2_address").val();
-		console.log(address);
+		var addr = $("#sample2_address").val();
+		console.log("add : "+addr);
 		geocoder.geocode(
 			{
-				'address' : address
+				'address' : addr
 			},
 			function(results, status) {
 				console.log(results);
 				if (status === 'OK') {
 														
 					$("#sample2_latitude").val(results[0].geometry.location.lat().toFixed(6));
+					console.log(results[0].geometry.location.lat().toFixed(6));
 					$("#sample2_longitude").val(results[0].geometry.location.lng().toFixed(6));
+					console.log(results[0].geometry.location.lng().toFixed(6));
+
 
 				} else {
 					alert('Geocode was not successful for the following reason: '
@@ -389,6 +392,7 @@
 			  if(data!=null){
 				  alert("삭제 성공");
 				  $('#dataModal').modal('hide');
+				  window.location.href =	'/home';
 			  }
 			  else{
 				  alert("삭제 실패");
@@ -404,6 +408,8 @@
 	<!-- 수정이벤트 -->
 	<script>
 	var funcUpdate = function(){
+		
+		console.log("lat : "+latitude +" lng : "+longitude);
 		var btsId = $('#input_bts_id')[0].value;
 		var postCode = $('#sample2_postcode')[0].value;
 		var address = $('#sample2_address')[0].value;
@@ -425,6 +431,7 @@
 			  if(data!=null){
 				  alert("수정 성공");
 				  $('#dataModal').modal('hide');
+				  window.location.href =	'/home';
 			  }
 			  else{
 				  alert("등록 실패");
@@ -445,6 +452,7 @@
 		
 		function closeDaumPostcode() {
 			element_layer.style.display = 'none';
+			onChangeAddress();
 		}
 		
 		function sample2_execDaumPostcode() {
@@ -492,6 +500,10 @@
 							// iframe을 넣은 element를 안보이게 한다.
 							// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
 							element_layer.style.display = 'none';
+							
+							console.log("sample2_address : "+ $('#sample2_address').val());
+
+							onChangeAddress();
 						},
 						width : '100%',
 						height : '100%',

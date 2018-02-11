@@ -6,4 +6,4 @@ api:
   bff:
     path: /
   services:
-    url: http://abtsm-be.paas.sk.com
+    url: http://abtsm-backend-responsible-panther.paas.sk.com
