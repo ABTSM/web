@@ -179,6 +179,20 @@
 						    		<input type ="text" class="form-control" id="sample2_address_detail"/>
 						    	</div>
 					  	</div>
+					  	
+					  	<div class="form-group">
+					  		<label for="sample2_latitude" class="col-sm-2 control-label">위도</label> 
+					  		<div class="col-sm-10">
+					    		<input type ="text" class="form-control" id="sample2_latitude"/>
+					    	</div>
+					  	</div>
+					  	
+					  	<div class="form-group">
+					  		<label for="sample2_longitude" class="col-sm-2 control-label">경도</label> 
+					  		<div class="col-sm-10">
+				    			<input type ="text" class="form-control" id="sample2_longitude"/>
+						    </div>
+					  	</div>
 					</form>
 				</div>
 			      <div class="modal-footer">
@@ -212,23 +226,62 @@
 	<script src="https://maps.google.com/maps/api/js?sensor=true&;key=AIzaSyDY8bJCGQtcZZvI1jOwjUhcI3gbkvQDI2Y"></script>
 
 	<script>
-		function setMarker(a, b, title, html) {
+
+	/*<![CDATA[*/
+		function setMarker(btsid,latitude, longitude, streetAddress, secondaryUnit, ) {
 			var marker;
-			console.log(a + "  " + b);
+			console.log(latitude + "  " + longitude);
 			marker = new google.maps.Marker({
 				map : map,
-				position : new google.maps.LatLng(a, b),
-				title : title
+				position : new google.maps.LatLng(latitude, longitude),
+		        animation: google.maps.Animation.DROP,
+				title : btsid
+			});
+			var contents = '<div id="content"><div id="siteNotice"></div><h1 id="firstHeading" class="firstHeading">'
+							+btsid+'</h1><div id="bodyContent"><p><b>ID : </b>'+btsid
+							+'</b></p><p><b>주소 : </b>'+streetAddress
+							+'</b></p><p><b>상세주소 : </b>'+secondaryUnit
+							+'</b></p></div></div>'
+			var infowindow = new google.maps.InfoWindow({
+				content : contents
+
 			});
 			google.maps.event.addListener(marker, 'load', function() {
-				infowindow.setContent(html);
-				infowindow.open(map, marker);
+				console.log("load-test")
 				infowindow.setposition(event.LatLng)
 			});
+			google.maps.event.addListener(marker, 'click', function() {
+				infowindow.open(map, marker);
+			});
 		}
+		/*]]>*/
 	</script>
+	<script>
+	
+	function geocodeAddress(geocoder, resultsMap) {
+		var address = $("#sample2_address").val();
+		geocoder.geocode(
+			{
+				'address' : address
+			},
+			function(results, status) {
+				if (status === 'OK') {
+					resultsMap
+							.setCenter(results[0].geometry.location);
+					var marker = new google.maps.Marker({
+						map : resultsMap,
+						position : results[0].geometry.location
+					});									
+					$("#sample2_latitude").val(results[0].geometry.location.lat().toFixed(6));
+					$("#sample2_longitude").val(results[0].geometry.location.lng().toFixed(6));
 
-
+				} else {
+					alert('Geocode was not successful for the following reason: '
+							+ status);
+				}
+			});
+	}
+	</script>
 	<!-- google Maps API -->
 	<script>
 		var marker;
@@ -236,38 +289,15 @@
 		var map;
 		var markers = [];
 		function initialize() {
-			var myLatlng;
+			var myLatlng = new google.maps.LatLng(36.9960144, 127.958510);
 
-			myLatlng = new google.maps.LatLng(36.9960144, 127.958510);
-			//var map;
-			//var marker;
-			console.log("--=----");
-			//
 			var mapOptions = {
 				zoom : 7,
 				center : myLatlng,
 				mapTypeId : google.maps.MapTypeId.ROADMAP
-
 			};
 
-			map = new google.maps.Map(document.getElementById('map-canvas'),
-					mapOptions);
-
-			var contentString = '<p style="line-height: 20px;">Place</p><p>Number</p>';
-
-			var infowindow = new google.maps.InfoWindow({
-				content : contentString
-			});
-
-			marker = new google.maps.Marker({
-				position : myLatlng,
-				map : map,
-				title : 'Marker'
-			});
-			google.maps.event.addListener(marker, 'click', function() {
-				infowindow.open(map, marker);
-			});
-			marker.setMap(null);
+			map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 		}
 	</script>
 
@@ -285,10 +315,7 @@
 							$('#data-table>tbody').empty();
 							/*<![CDATA[*/
 							for (var i = 0; i < data.length; i++) {
-								/*]]>*/
-								setMarker(data[i].latitude, data[i].longitude,
-										data[i].streetAddress,
-										data[i].secondaryUnit);
+								setMarker(data[i].ssid,data[i].latitude, data[i].longitude,	data[i].streetAddress,data[i].secondaryUnit);
 								var str = ' <tr><td>' + data[i].ssid
 										+ '</td><td>' + data[i].latitude
 										+ '</td><td>' + data[i].longitude
@@ -301,6 +328,7 @@
 						    $('#data-table').DataTable({
 					            responsive: true
 					        });
+							/*]]>*/
 						}
 					});
 				});
@@ -317,7 +345,7 @@
 	
 	<!-- 로우 클릭시 이벤트 발생 -->
 	<script>
-	$("table").delegate("tr", "click", function(){
+	$("table").delegate("tbody tr", "click", function(){
 		var td = $(this).children;
 		console.log(td);
 		$('#input_bts_id')[0].value=$(this).find('td').eq(0).text();
@@ -390,6 +418,15 @@
 		
 		function closeDaumPostcode() {
 			// iframe을 넣은 element를 안보이게 한다.
+			console.log("1");
+			<!-- google Maps API(geocode) -->
+			var map = new google.maps.Map(document.getElementById('map-canvas'),
+					mapOptions);
+			
+			var geocoder = new google.maps.Geocoder();
+			//console.log(geocodeAddress(geocoder, map)+"!!!!!! lookkkkkk");
+			console.log("1")
+			geocodeAddress(geocoder, map);
 			element_layer.style.display = 'none';
 		}
 		
@@ -431,7 +468,7 @@
 									.getElementById('sample2_address').value = fullAddr;
 							document
 									.getElementById('sample2_addressEnglish').value = data.addressEnglish;
-		
+
 							// iframe을 넣은 element를 안보이게 한다.
 							// (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)
 							element_layer.style.display = 'none';
