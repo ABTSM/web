@@ -395,10 +395,16 @@
 				  window.location.href =	'/home';
 			  }
 			  else{
+				  console.log(data);
+				  console.log(textStatus);
+				  console.log(jqXHR);
 				  alert("삭제 실패");
 			  }
 		  },
 		  error: function(jqXHR, textStatus, errorThrown){
+			  console.log(jqXHR);
+			  console.log(textStatus);
+			  console.log(errorThrown);
 			  alert("삭제 실패");
 		  }
 		});
@@ -434,10 +440,16 @@
 				  window.location.href =	'/home';
 			  }
 			  else{
+				  console.log(data);
+				  console.log(textStatus);
+				  console.log(jqXHR);
 				  alert("등록 실패");
 			  }
 		  },
 		  error: function(jqXHR, textStatus, errorThrown){
+			  console.log(jqXHR);
+			  console.log(textStatus);
+			  console.log(errorThrown);
 			  alert("등록 실패");
 		  }
 		});
